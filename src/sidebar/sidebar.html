@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LocalStorage Switcher</title>
+    <link rel="stylesheet" href="sidebar.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="panel-header">
+        <h1>LocalStorage Switcher</h1>
+        <p id="activeOrigin" class="origin">Active origin: detecting...</p>
+      </header>
+
+      <section class="card">
+        <p class="label">Saved presets</p>
+        <div id="presetGroups" class="preset-groups" aria-label="Saved presets"></div>
+      </section>
+
+      <section class="card form-grid">
+        <label class="label" for="presetGroup">Group</label>
+        <input id="presetGroup" type="text" placeholder="Example: QA" maxlength="60" />
+
+        <label class="label" for="presetLabel">Preset name</label>
+        <input id="presetLabel" type="text" placeholder="Example: QA Tenant A" maxlength="80" />
+
+        <label class="label" for="storageKey">localStorage key</label>
+        <input id="storageKey" type="text" placeholder="tenant" maxlength="120" />
+
+        <label class="label" for="storageValue">localStorage value</label>
+        <textarea id="storageValue" rows="4" placeholder="tenant-a"></textarea>
+      </section>
+
+      <section class="button-row">
+        <button id="createBtn" type="button">Create</button>
+        <button id="updateBtn" type="button" disabled>Update</button>
+        <button id="deleteBtn" type="button" disabled>Delete</button>
+      </section>
+
+      <section class="button-row">
+        <button id="applyBtn" type="button" class="apply" disabled>Apply to active tab + refresh</button>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+
+    <script src="../shared/storage.js"></script>
+    <script src="sidebar.js"></script>
+  </body>
+</html>

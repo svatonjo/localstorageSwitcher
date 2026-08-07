@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "LocalStorage switch",
+  "version": "1.0.0",
+  "description": "A Firefox WebExtension to save localStorage presets (single key + value), apply one to the active tab, and automatically refresh the page.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "localstorage-switch@svatonjo.github",
+      "strict_min_version": "121.0"
+    }
+  },
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "scripts": ["src/background.js"]
+  },
+  "action": {
+    "default_title": "Open LocalStorage Switcher"
+  },
+  "sidebar_action": {
+    "default_title": "LocalStorage Switcher",
+    "default_panel": "src/sidebar/sidebar.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "48": "icon48px.png",
+    "96": "icon96px.png"
+  }
+}
