@@ -15,6 +15,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, sans-serif;
@@ -60,6 +64,7 @@ body {
 }
 
 input,
+select,
 textarea,
 button {
   width: 100%;
@@ -69,8 +74,30 @@ button {
   font: inherit;
 }
 
+select {
+  background: #ffffff;
+}
+
 textarea {
   resize: vertical;
+}
+
+.inline-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.inline-actions.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.inline-actions.three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.api-section {
+  border-left: 3px solid var(--accent);
+  padding-left: 8px;
 }
 
 .preset-groups {
@@ -125,6 +152,52 @@ textarea {
   color: #587088;
 }
 
+.preset-row {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.preset-row .preset-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.preset-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.icon-btn.icon-apply {
+  background: var(--accent);
+  border-color: var(--accent-strong);
+  color: #ffffff;
+}
+
+.icon-btn.icon-apply:hover:enabled {
+  background: var(--accent-strong);
+}
+
+.icon-btn.icon-fetch {
+  color: var(--accent-strong);
+}
+
 .button-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -161,6 +234,11 @@ button.apply {
 
 button.apply:hover:enabled {
   background: var(--accent-strong);
+}
+
+button.danger {
+  color: var(--danger);
+  border-color: var(--danger);
 }
 
 .status {

@@ -13,6 +13,23 @@
         <p id="activeOrigin" class="origin">Active origin: detecting...</p>
       </header>
 
+      <section class="card form-grid">
+        <label class="label" for="collectionSelect">Collection</label>
+        <select id="collectionSelect"></select>
+        <div class="inline-actions three">
+          <button id="newCollectionBtn" type="button">New</button>
+          <button id="renameCollectionBtn" type="button">Rename</button>
+          <button id="deleteCollectionBtn" type="button">Delete</button>
+        </div>
+        <div id="collectionEditor" class="form-grid" hidden>
+          <input id="collectionName" type="text" placeholder="Collection name" maxlength="60" />
+          <div class="inline-actions two">
+            <button id="saveCollectionBtn" type="button" class="apply">Save</button>
+            <button id="cancelCollectionBtn" type="button">Cancel</button>
+          </div>
+        </div>
+      </section>
+
       <section class="card">
         <p class="label">Saved presets</p>
         <div id="presetGroups" class="preset-groups" aria-label="Saved presets"></div>
@@ -27,6 +44,41 @@
 
         <label class="label" for="storageKey">localStorage key</label>
         <input id="storageKey" type="text" placeholder="tenant" maxlength="120" />
+
+        <label class="label" for="valueMode">Value source</label>
+        <select id="valueMode">
+          <option value="static">Static value</option>
+          <option value="api">From API</option>
+        </select>
+
+        <div id="apiSection" class="form-grid api-section" hidden>
+          <label class="label" for="apiMethod">Request method</label>
+          <select id="apiMethod">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="PATCH">PATCH</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+
+          <label class="label" for="apiUrl">Request URL</label>
+          <input id="apiUrl" type="url" placeholder="https://api.example.com/token" />
+
+          <label class="label" for="apiHeaders">Request headers (one per line)</label>
+          <textarea
+            id="apiHeaders"
+            rows="3"
+            placeholder="Content-Type: application/json&#10;Authorization: Bearer ..."
+          ></textarea>
+
+          <label class="label" for="apiBody">Request body</label>
+          <textarea id="apiBody" rows="3" placeholder='{"username": "qa"}'></textarea>
+
+          <label class="label" for="responsePath">Response key</label>
+          <input id="responsePath" type="text" placeholder="data.token or items[0].jwt (empty = whole body)" />
+
+          <button id="fetchBtn" type="button" class="apply" disabled>Fetch from API + save</button>
+        </div>
 
         <label class="label" for="storageValue">localStorage value</label>
         <textarea id="storageValue" rows="4" placeholder="tenant-a"></textarea>

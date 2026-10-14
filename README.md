@@ -4,10 +4,12 @@ A Firefox WebExtension to save localStorage presets (single key + value), apply 
 
 ## Features
 
+- Collections: switch between independent sets of presets (create, rename, delete).
 - Global preset list saved in extension storage.
 - Group field for organizing presets.
 - Accordion-style grouped list in the sidebar.
 - Sidebar UI for create, update, delete, and apply.
+- Per-preset value source: static value or fetched from an API.
 - Applies to the current active tab only.
 - Automatically refreshes after successful update.
 
@@ -28,10 +30,29 @@ A Firefox WebExtension to save localStorage presets (single key + value), apply 
 
 ## Usage
 
-1. Enter group, preset name, localStorage key, and value.
-2. Click **Create**.
-3. Expand a group and select a preset in the accordion list.
-4. Click **Apply to active tab + refresh**.
+1. Pick a collection (or click **New** to create one).
+2. Enter group, preset name, localStorage key, and value.
+3. Click **Create**.
+4. Expand a group and select a preset in the accordion list.
+5. Click **Apply to active tab + refresh**.
+
+## Collections
+
+- Each collection holds its own presets; the preset list shows only the selected collection.
+- Preset names must be unique per collection + group.
+- Deleting a collection deletes all its presets (click **Delete** twice to confirm). The last collection cannot be deleted.
+- On upgrade from 1.0.x, existing presets are moved into a `Default` collection automatically.
+
+## Values from an API
+
+1. Set **Value source** to **From API**.
+2. Fill in request method, URL, optional headers (one `Name: value` per line) and optional body (not sent for GET).
+3. Set **Response key** as a dot path into the JSON response, for example `data.token` or `items[0].jwt`. Leave it empty to use the whole response body.
+4. Select the saved preset and click **Fetch from API + save**.
+
+The request runs in the extension background script (no CORS restrictions, 15 s timeout). The extracted value overwrites the localStorage value field and the preset is saved. Nothing is applied to the tab until you click **Apply**. Non-string values are stored as JSON.
+
+Firefox treats Manifest V3 host permissions as optional. On the first fetch to a new host, Firefox asks you to allow access to that site; without that grant the request fails with a CORS error. Granted sites can be reviewed in `about:addons` > extension > **Permissions**.
 
 ## Preset Persistence
 
